@@ -2,7 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 	// Redirect if already logged in
 	if (isAuthenticated()) {
-		window.location.href = "pages/dashboard.html";
+		const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
+		window.location.href = basePath + 'pages/dashboard.html';
 		return;
 	}
 
@@ -35,7 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		if (login(username, password)) {
 			setTimeout(() => {
-				window.location.href = "pages/dashboard.html";
+				// Support both local and GitHub Pages paths
+				const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
+				window.location.href = basePath + 'pages/dashboard.html';
 			}, 500);
 		}
 	});

@@ -88,7 +88,8 @@ function handleDeleteAccount() {
 			localStorage.removeItem("currentUser");
 			showToast("Akun berhasil dihapus", "success");
 			setTimeout(() => {
-				window.location.href = "../index.html";
+				const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
+				window.location.href = basePath + 'index.html';
 			}, 1500);
 		} else {
 			showToast("Penghapusan akun dibatalkan", "info");

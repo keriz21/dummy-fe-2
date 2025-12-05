@@ -16,7 +16,9 @@ function logout() {
 	localStorage.removeItem("currentUser");
 	showToast("Logout berhasil", "success");
 	setTimeout(() => {
-		window.location.href = "../index.html";
+		// Support both local and GitHub Pages paths
+		const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
+		window.location.href = basePath + 'index.html';
 	}, 500);
 }
 
@@ -132,14 +134,17 @@ function deleteUser(userId) {
 // Page protection
 function protectPage() {
 	if (!isAuthenticated()) {
-		window.location.href = "../index.html";
+		// Support both local and GitHub Pages paths
+		const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
+		window.location.href = basePath + 'index.html';
 	}
 }
 
 // Call protectPage on protected pages
-if (
-	window.location.pathname !== "/index.html" &&
-	!window.location.pathname.endsWith("404.html")
-) {
+const currentPath = window.location.pathname;
+const isLoginPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || currentPath.endsWith('/dummy-fe-2');
+const is404Page = currentPath.includes('404.html');
+
+if (!isLoginPage && !is404Page) {
 	protectPage();
 }
