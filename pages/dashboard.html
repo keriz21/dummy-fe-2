@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard - Dashboard App</title>
+		<link rel="stylesheet" href="../assets/css/style.css" />
+	</head>
+	<body>
+		<div id="toast-container"></div>
+		<div id="header"></div>
+
+		<div class="main-container">
+			<div id="sidebar"></div>
+
+			<main class="content">
+				<h1>Dashboard</h1>
+
+				<div class="stats-grid">
+					<div class="stat-card">
+						<div class="stat-icon">👥</div>
+						<div class="stat-info">
+							<h3>Total Users</h3>
+							<p class="stat-value" id="totalUsers">0</p>
+						</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-icon">📊</div>
+						<div class="stat-info">
+							<h3>Total Projects</h3>
+							<p class="stat-value">24</p>
+						</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-icon">✅</div>
+						<div class="stat-info">
+							<h3>Completed</h3>
+							<p class="stat-value">18</p>
+						</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-icon">⏳</div>
+						<div class="stat-info">
+							<h3>In Progress</h3>
+							<p class="stat-value">6</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="chart-section">
+					<h2>Aktivitas Terbaru</h2>
+					<div class="activity-list">
+						<div class="activity-item">
+							<span class="activity-time">2 menit yang lalu</span>
+							<p>User baru terdaftar: John Doe</p>
+						</div>
+						<div class="activity-item">
+							<span class="activity-time">15 menit yang lalu</span>
+							<p>Project "Website Redesign" selesai</p>
+						</div>
+						<div class="activity-item">
+							<span class="activity-time">1 jam yang lalu</span>
+							<p>Update pada halaman settings</p>
+						</div>
+						<div class="activity-item">
+							<span class="activity-time">3 jam yang lalu</span>
+							<p>User "Jane Smith" memperbarui profile</p>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div id="footer"></div>
+
+		<script src="../assets/js/utils.js"></script>
+		<script src="../assets/js/auth.js"></script>
+		<script src="../components/header.js"></script>
+		<script src="../components/sidebar.js"></script>
+		<script src="../components/footer.js"></script>
+		<script src="../assets/js/dashboard.js"></script>
+	</body>
+</html>

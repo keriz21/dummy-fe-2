@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Profile - Dashboard App</title>
+		<link rel="stylesheet" href="../assets/css/style.css" />
+	</head>
+	<body>
+		<div id="toast-container"></div>
+		<div id="header"></div>
+
+		<div class="main-container">
+			<div id="sidebar"></div>
+
+			<main class="content">
+				<h1>Profile</h1>
+
+				<div class="profile-container">
+					<div class="profile-card">
+						<div class="profile-avatar">
+							<div class="avatar-circle" id="avatarCircle">
+								<span id="avatarInitial">U</span>
+							</div>
+						</div>
+
+						<form id="profileForm">
+							<div class="form-group">
+								<label for="profileUsername">Username</label>
+								<input
+									type="text"
+									id="profileUsername"
+									name="username"
+									readonly
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="profileEmail">Email</label>
+								<input type="email" id="profileEmail" name="email" required />
+							</div>
+
+							<div class="form-group">
+								<label for="profileFullName">Nama Lengkap</label>
+								<input
+									type="text"
+									id="profileFullName"
+									name="fullName"
+									required
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="profileBio">Bio</label>
+								<textarea id="profileBio" name="bio" rows="4"></textarea>
+							</div>
+
+							<div class="form-group">
+								<label for="profilePhone">Telepon</label>
+								<input type="tel" id="profilePhone" name="phone" />
+							</div>
+
+							<button type="submit" class="btn btn-primary">
+								Simpan Perubahan
+							</button>
+						</form>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div id="footer"></div>
+
+		<script src="../assets/js/utils.js"></script>
+		<script src="../assets/js/auth.js"></script>
+		<script src="../components/header.js"></script>
+		<script src="../components/sidebar.js"></script>
+		<script src="../components/footer.js"></script>
+		<script src="../assets/js/profile.js"></script>
+	</body>
+</html>

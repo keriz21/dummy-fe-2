@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Users - Dashboard App</title>
+		<link rel="stylesheet" href="../assets/css/style.css" />
+	</head>
+	<body>
+		<div id="toast-container"></div>
+		<div id="header"></div>
+
+		<div class="main-container">
+			<div id="sidebar"></div>
+
+			<main class="content">
+				<div class="page-header">
+					<h1>Manajemen Users</h1>
+					<button class="btn btn-primary" id="addUserBtn">+ Tambah User</button>
+				</div>
+
+				<div class="table-container">
+					<table class="data-table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Username</th>
+								<th>Email</th>
+								<th>Nama Lengkap</th>
+								<th>Status</th>
+								<th>Aksi</th>
+							</tr>
+						</thead>
+						<tbody id="usersTableBody">
+							<!-- Data akan dimuat via JavaScript -->
+						</tbody>
+					</table>
+				</div>
+			</main>
+		</div>
+
+		<div id="footer"></div>
+
+		<!-- Modal untuk Add/Edit User -->
+		<div id="userModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 id="modalTitle">Tambah User</h2>
+					<span class="close">&times;</span>
+				</div>
+				<form id="userForm">
+					<input type="hidden" id="userId" />
+					<div class="form-group">
+						<label for="modalUsername">Username</label>
+						<input type="text" id="modalUsername" name="username" required />
+					</div>
+					<div class="form-group">
+						<label for="modalEmail">Email</label>
+						<input type="email" id="modalEmail" name="email" required />
+					</div>
+					<div class="form-group">
+						<label for="modalFullName">Nama Lengkap</label>
+						<input type="text" id="modalFullName" name="fullName" required />
+					</div>
+					<div class="form-group">
+						<label for="modalStatus">Status</label>
+						<select id="modalStatus" name="status">
+							<option value="active">Active</option>
+							<option value="inactive">Inactive</option>
+						</select>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="cancelBtn">
+							Batal
+						</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script src="../assets/js/utils.js"></script>
+		<script src="../assets/js/auth.js"></script>
+		<script src="../components/header.js"></script>
+		<script src="../components/sidebar.js"></script>
+		<script src="../components/footer.js"></script>
+		<script src="../assets/js/users.js"></script>
+	</body>
+</html>

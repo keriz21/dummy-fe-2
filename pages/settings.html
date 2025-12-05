@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Settings - Dashboard App</title>
+		<link rel="stylesheet" href="../assets/css/style.css" />
+	</head>
+	<body>
+		<div id="toast-container"></div>
+		<div id="header"></div>
+
+		<div class="main-container">
+			<div id="sidebar"></div>
+
+			<main class="content">
+				<h1>Settings</h1>
+
+				<div class="settings-container">
+					<div class="settings-section">
+						<h2>Preferensi Tampilan</h2>
+						<div class="setting-item">
+							<div class="setting-info">
+								<h3>Dark Mode</h3>
+								<p>Aktifkan mode gelap untuk kenyamanan mata</p>
+							</div>
+							<label class="toggle-switch">
+								<input type="checkbox" id="darkModeToggle" />
+								<span class="slider"></span>
+							</label>
+						</div>
+					</div>
+
+					<div class="settings-section">
+						<h2>Notifikasi</h2>
+						<div class="setting-item">
+							<div class="setting-info">
+								<h3>Email Notifications</h3>
+								<p>Terima notifikasi via email</p>
+							</div>
+							<label class="toggle-switch">
+								<input type="checkbox" id="emailNotif" checked />
+								<span class="slider"></span>
+							</label>
+						</div>
+						<div class="setting-item">
+							<div class="setting-info">
+								<h3>Push Notifications</h3>
+								<p>Terima notifikasi push browser</p>
+							</div>
+							<label class="toggle-switch">
+								<input type="checkbox" id="pushNotif" />
+								<span class="slider"></span>
+							</label>
+						</div>
+					</div>
+
+					<div class="settings-section">
+						<h2>Keamanan</h2>
+						<div class="setting-item">
+							<div class="setting-info">
+								<h3>Ubah Password</h3>
+								<p>Update password akun Anda</p>
+							</div>
+							<button class="btn btn-secondary" id="changePasswordBtn">
+								Ubah Password
+							</button>
+						</div>
+						<div class="setting-item">
+							<div class="setting-info">
+								<h3>Two-Factor Authentication</h3>
+								<p>Tambahkan lapisan keamanan ekstra</p>
+							</div>
+							<label class="toggle-switch">
+								<input type="checkbox" id="twoFactorAuth" />
+								<span class="slider"></span>
+							</label>
+						</div>
+					</div>
+
+					<div class="settings-section">
+						<h2>Zona Bahaya</h2>
+						<div class="setting-item">
+							<div class="setting-info">
+								<h3>Hapus Akun</h3>
+								<p>Hapus permanen akun dan semua data</p>
+							</div>
+							<button class="btn btn-danger" id="deleteAccountBtn">
+								Hapus Akun
+							</button>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+
+		<div id="footer"></div>
+
+		<script src="../assets/js/utils.js"></script>
+		<script src="../assets/js/auth.js"></script>
+		<script src="../components/header.js"></script>
+		<script src="../components/sidebar.js"></script>
+		<script src="../components/footer.js"></script>
+		<script src="../assets/js/settings.js"></script>
+	</body>
+</html>
