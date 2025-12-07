@@ -55,21 +55,21 @@
 			</div>
 		</div>
 
-	<script>
-		// Handle redirect from 404.html
-		(function() {
-			const redirect = sessionStorage.redirect;
-			delete sessionStorage.redirect;
-			if (redirect && redirect !== location.href) {
-				// If user was trying to access a protected page, check if authenticated
-				if (localStorage.getItem('currentUser')) {
-					history.replaceState(null, null, redirect);
+		<script>
+			// Handle redirect from 404.html
+			(function () {
+				const redirect = sessionStorage.redirect;
+				delete sessionStorage.redirect;
+				if (redirect && redirect !== location.href) {
+					// If user was trying to access a protected page, check if authenticated
+					if (localStorage.getItem("currentUser")) {
+						history.replaceState(null, null, redirect);
+					}
 				}
-			}
-		})();
-	</script>
-	<script src="assets/js/utils.js"></script>
-	<script src="assets/js/auth.js"></script>
-	<script src="assets/js/login.js"></script>
-</body>
+			})();
+		</script>
+		<script src="assets/js/utils.js"></script>
+		<script src="assets/js/auth.js"></script>
+		<script src="assets/js/login.js"></script>
+	</body>
 </html>

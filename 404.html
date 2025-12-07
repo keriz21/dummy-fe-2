@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        // GitHub Pages 404 redirect handler
-        // Redirects to index.html with the current path as a parameter
-        sessionStorage.redirect = location.href;
-        const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
-        window.location.replace(basePath + 'index.html');
-    </script>
-</head>
-<body>
-    Redirecting...
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Redirecting...</title>
+		<script>
+			// GitHub Pages 404 redirect handler
+			// Redirects to index.html with the current path as a parameter
+			sessionStorage.redirect = location.href;
+			const basePath = window.location.pathname.includes("/dummy-fe-2/")
+				? "/dummy-fe-2/"
+				: "/";
+			window.location.replace(basePath + "index.html");
+		</script>
+	</head>
+	<body>
+		Redirecting...
+	</body>
 </html>

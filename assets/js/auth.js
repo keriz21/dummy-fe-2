@@ -17,8 +17,10 @@ function logout() {
 	showToast("Logout berhasil", "success");
 	setTimeout(() => {
 		// Support both local and GitHub Pages paths
-		const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
-		window.location.href = basePath + 'index.html';
+		const basePath = window.location.pathname.includes("/dummy-fe-2/")
+			? "/dummy-fe-2/"
+			: "/";
+		window.location.href = basePath + "index.html";
 	}, 500);
 }
 
@@ -135,15 +137,20 @@ function deleteUser(userId) {
 function protectPage() {
 	if (!isAuthenticated()) {
 		// Support both local and GitHub Pages paths
-		const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
-		window.location.href = basePath + 'index.html';
+		const basePath = window.location.pathname.includes("/dummy-fe-2/")
+			? "/dummy-fe-2/"
+			: "/";
+		window.location.href = basePath + "index.html";
 	}
 }
 
 // Call protectPage on protected pages
 const currentPath = window.location.pathname;
-const isLoginPage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || currentPath.endsWith('/dummy-fe-2');
-const is404Page = currentPath.includes('404.html');
+const isLoginPage =
+	currentPath.endsWith("index.html") ||
+	currentPath.endsWith("/") ||
+	currentPath.endsWith("/dummy-fe-2");
+const is404Page = currentPath.includes("404.html");
 
 if (!isLoginPage && !is404Page) {
 	protectPage();

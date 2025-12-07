@@ -9,22 +9,27 @@
 	<body>
 		<div class="error-container">
 			<div class="error-content">
-			<h1 class="error-code">404</h1>
-			<h2>Halaman Tidak Ditemukan</h2>
-			<p>Maaf, halaman yang Anda cari tidak dapat ditemukan.</p>
-			<div class="error-actions">
-				<a href="#" class="btn btn-primary" id="dashboardLink"
-					>Kembali ke Dashboard</a
-				>
-				<a href="#" class="btn btn-secondary" id="loginLink">Ke Halaman Login</a>
+				<h1 class="error-code">404</h1>
+				<h2>Halaman Tidak Ditemukan</h2>
+				<p>Maaf, halaman yang Anda cari tidak dapat ditemukan.</p>
+				<div class="error-actions">
+					<a href="#" class="btn btn-primary" id="dashboardLink"
+						>Kembali ke Dashboard</a
+					>
+					<a href="#" class="btn btn-secondary" id="loginLink"
+						>Ke Halaman Login</a
+					>
+				</div>
 			</div>
 		</div>
-	</div>
-	<script>
-		// Support both local and GitHub Pages paths
-		const basePath = window.location.pathname.includes('/dummy-fe-2/') ? '/dummy-fe-2/' : '/';
-		document.getElementById('dashboardLink').href = basePath + 'pages/dashboard.html';
-		document.getElementById('loginLink').href = basePath + 'index.html';
-	</script>
-</body>
+		<script>
+			// Support both local and GitHub Pages paths
+			const basePath = window.location.pathname.includes("/dummy-fe-2/")
+				? "/dummy-fe-2/"
+				: "/";
+			document.getElementById("dashboardLink").href =
+				basePath + "pages/dashboard.html";
+			document.getElementById("loginLink").href = basePath + "index.html";
+		</script>
+	</body>
 </html>

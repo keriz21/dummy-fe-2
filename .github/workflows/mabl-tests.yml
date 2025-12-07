@@ -1,0 +1,30 @@
+name: Run mabl Tests
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+    workflow_dispatch:
+
+jobs:
+    mabl-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Run mabl deployment tests
+              uses: mablhq/github-run-tests-action@v1
+              env:
+                  MABL_API_KEY: ${{ secrets.MABL_API_KEY }}
+              with:
+                  application-id: ${{ secrets.MABL_APP_ID }}
+                  environment-id: ${{ secrets.MABL_ENV_ID }}
+
+            - name: Post test results
+              if: always()
+              run: |
+                  echo "mabl tests completed"
+                  echo "Check mabl dashboard for detailed results"
