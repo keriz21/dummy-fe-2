@@ -16,6 +16,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Run mabl deployment tests
+              id: mabl
               uses: mablhq/github-run-tests-action@v1
               env:
                   MABL_API_KEY: ${{ secrets.MABL_API_KEY }}
@@ -28,3 +29,112 @@ jobs:
               run: |
                   echo "mabl tests completed"
                   echo "Check mabl dashboard for detailed results"
+
+            - name: Notify Slack on Success
+              if: success()
+              uses: slackapi/slack-github-action@v1.26.0
+              with:
+                  payload: |
+                      {
+                          "text": "✅ mabl Tests PASSED",
+                          "blocks": [
+                              {
+                                  "type": "header",
+                                  "text": {
+                                      "type": "plain_text",
+                                      "text": "✅ mabl Tests Passed"
+                                  }
+                              },
+                              {
+                                  "type": "section",
+                                  "fields": [
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Repository:*\n${{ github.repository }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Branch:*\n${{ github.ref_name }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Commit:*\n${{ github.sha }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Author:*\n${{ github.actor }}"
+                                      }
+                                  ]
+                              },
+                              {
+                                  "type": "actions",
+                                  "elements": [
+                                      {
+                                          "type": "button",
+                                          "text": {
+                                              "type": "plain_text",
+                                              "text": "View Run"
+                                          },
+                                          "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+            - name: Notify Slack on Failure
+              if: failure()
+              uses: slackapi/slack-github-action@v1.26.0
+              with:
+                  payload: |
+                      {
+                          "text": "❌ mabl Tests FAILED",
+                          "blocks": [
+                              {
+                                  "type": "header",
+                                  "text": {
+                                      "type": "plain_text",
+                                      "text": "❌ mabl Tests Failed"
+                                  }
+                              },
+                              {
+                                  "type": "section",
+                                  "fields": [
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Repository:*\n${{ github.repository }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Branch:*\n${{ github.ref_name }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Commit:*\n${{ github.sha }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Author:*\n${{ github.actor }}"
+                                      }
+                                  ]
+                              },
+                              {
+                                  "type": "actions",
+                                  "elements": [
+                                      {
+                                          "type": "button",
+                                          "text": {
+                                              "type": "plain_text",
+                                              "text": "View Failed Run"
+                                          },
+                                          "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                                          "style": "danger"
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
