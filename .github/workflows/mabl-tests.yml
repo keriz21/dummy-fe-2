@@ -15,6 +15,45 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
+            - name: Notify Slack - Testing Started
+              uses: slackapi/slack-github-action@v1.26.0
+              with:
+                  payload: |
+                      {
+                          "text": "🧪 Testing Started - ${{ github.repository }}",
+                          "blocks": [
+                              {
+                                  "type": "header",
+                                  "text": {
+                                      "type": "plain_text",
+                                      "text": "🧪 Testing Started"
+                                  }
+                              },
+                              {
+                                  "type": "section",
+                                  "text": {
+                                      "type": "mrkdwn",
+                                      "text": "GitHub Actions is running mabl tests for *${{ github.repository }}*"
+                                  }
+                              },
+                              {
+                                  "type": "section",
+                                  "fields": [
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Branch:*\n${{ github.ref_name }}"
+                                      },
+                                      {
+                                          "type": "mrkdwn",
+                                          "text": "*Triggered by:*\n${{ github.actor }}"
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
             - name: Run mabl deployment tests
               id: mabl
               uses: mablhq/github-run-tests-action@v1
@@ -36,13 +75,20 @@ jobs:
               with:
                   payload: |
                       {
-                          "text": "✅ mabl Tests PASSED",
+                          "text": "✅ ${{ github.repository }} - mabl Tests PASSED",
                           "blocks": [
                               {
                                   "type": "header",
                                   "text": {
                                       "type": "plain_text",
-                                      "text": "✅ mabl Tests Passed"
+                                      "text": "✅ Tests Passed"
+                                  }
+                              },
+                              {
+                                  "type": "section",
+                                  "text": {
+                                      "type": "mrkdwn",
+                                      "text": "*${{ github.repository }}* successfully passed all mabl tests! 🎉"
                                   }
                               },
                               {
@@ -90,13 +136,20 @@ jobs:
               with:
                   payload: |
                       {
-                          "text": "❌ mabl Tests FAILED",
+                          "text": "❌ ${{ github.repository }} - mabl Tests FAILED",
                           "blocks": [
                               {
                                   "type": "header",
                                   "text": {
                                       "type": "plain_text",
-                                      "text": "❌ mabl Tests Failed"
+                                      "text": "❌ Tests Failed"
+                                  }
+                              },
+                              {
+                                  "type": "section",
+                                  "text": {
+                                      "type": "mrkdwn",
+                                      "text": "⚠️ *${{ github.repository }}* failed mabl tests. Please review the errors."
                                   }
                               },
                               {
@@ -138,3 +191,127 @@ jobs:
                       }
               env:
                   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    # deploy-production:
+    #     needs: mabl-test
+    #     runs-on: ubuntu-latest
+    #     if: success() && github.ref == 'refs/heads/main'
+
+    #     steps:
+    #         - name: Checkout code
+    #           uses: actions/checkout@v4
+
+    #         - name: Deploy to Production
+    #           run: |
+    #               echo "🚀 Deploying to production..."
+    #               echo "All tests passed, deploying now!"
+    #               # Tambahkan script deploy Anda di sini
+    #               # Contoh: npm run deploy, rsync, aws s3 sync, dll
+
+    #         - name: Notify Slack - Deploy Started
+    #           uses: slackapi/slack-github-action@v1.26.0
+    #           with:
+    #               payload: |
+    #                   {
+    #                       "text": "🚀 Deploying to Production...",
+    #                       "blocks": [
+    #                           {
+    #                               "type": "header",
+    #                               "text": {
+    #                                   "type": "plain_text",
+    #                                   "text": "🚀 Deploying to Production"
+    #                               }
+    #                           },
+    #                           {
+    #                               "type": "section",
+    #                               "text": {
+    #                                   "type": "mrkdwn",
+    #                                   "text": "All mabl tests passed! Deploying *${{ github.repository }}* to production."
+    #                               }
+    #                           }
+    #                       ]
+    #                   }
+    #           env:
+    #               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    #         - name: Notify Slack - Deploy Success
+    #           if: success()
+    #           uses: slackapi/slack-github-action@v1.26.0
+    #           with:
+    #               payload: |
+    #                   {
+    #                       "text": "✅ Production Deployment SUCCESS",
+    #                       "blocks": [
+    #                           {
+    #                               "type": "header",
+    #                               "text": {
+    #                                   "type": "plain_text",
+    #                                   "text": "✅ Deployed to Production"
+    #                               }
+    #                           },
+    #                           {
+    #                               "type": "section",
+    #                               "fields": [
+    #                                   {
+    #                                       "type": "mrkdwn",
+    #                                       "text": "*Environment:*\nProduction"
+    #                                   },
+    #                                   {
+    #                                       "type": "mrkdwn",
+    #                                       "text": "*Branch:*\n${{ github.ref_name }}"
+    #                                   },
+    #                                   {
+    #                                       "type": "mrkdwn",
+    #                                       "text": "*Deployed by:*\n${{ github.actor }}"
+    #                                   },
+    #                                   {
+    #                                       "type": "mrkdwn",
+    #                                       "text": "*Status:*\n✅ Live"
+    #                                   }
+    #                               ]
+    #                           }
+    #                       ]
+    #                   }
+    #           env:
+    #               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    #         - name: Notify Slack - Deploy Failed
+    #           if: failure()
+    #           uses: slackapi/slack-github-action@v1.26.0
+    #           with:
+    #               payload: |
+    #                   {
+    #                       "text": "❌ Production Deployment FAILED",
+    #                       "blocks": [
+    #                           {
+    #                               "type": "header",
+    #                               "text": {
+    #                                   "type": "plain_text",
+    #                                   "text": "❌ Deployment Failed"
+    #                               }
+    #                           },
+    #                           {
+    #                               "type": "section",
+    #                               "text": {
+    #                                   "type": "mrkdwn",
+    #                                   "text": "⚠️ Production deployment failed for *${{ github.repository }}*"
+    #                               }
+    #                           },
+    #                           {
+    #                               "type": "actions",
+    #                               "elements": [
+    #                                   {
+    #                                       "type": "button",
+    #                                       "text": {
+    #                                           "type": "plain_text",
+    #                                           "text": "View Logs"
+    #                                       },
+    #                                       "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+    #                                       "style": "danger"
+    #                                   }
+    #                               ]
+    #                           }
+    #                       ]
+    #                   }
+    #           env:
+    #               SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
